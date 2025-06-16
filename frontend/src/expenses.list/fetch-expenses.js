@@ -6,7 +6,7 @@ export async function getExpensesData() { //haalt ruwe data van API via GET/expe
         throw new Error ("couldn't get data");
     }
 
-    return await response.json();
+    return await response.json(); //geen json, geen strings
 }
 
 

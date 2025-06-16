@@ -1,10 +1,51 @@
+import { getExpensesData } from "./fetch-expenses.js";
+
+export function formatExpenses(expenses) { //expenses van fetch omzetten en date (zonder value) aan toevoegen
+
+        const d = new Date(); // nieuwe datum via constructor, neemt ook argumenten> andere date
+
+        //je wilt een object toevoegen, niet enkel de datum
+        expenses.forEach(objectExpense => objectExpense.date = d.toLocaleDateString()) //toLocaleDateString() zet d om in een ander format van datum
+        return expenses;
+
+}
+
+
+//array.forEach => voor elk element uit array
+
+// methode om nog onbestaande property aan object toe te voegen
+//      object.new_property = new_propertyValue;
 
 
 
-//await fetch("https://api.example.com/users", { // kan even duren 
-        
-        //     method: 'GET', 
-        //     headers: {'Content-Type': 'application/json'}, //standaard meegegven
-        //     body: JSON.stringify( user )  //omzetten naar strings zodat het in server gaat
-        
-        // } )")
+// Maak deze hulpfunctie
+// testbaar zonder ze publiek te maken met een export zoals:
+
+export const __only_for_test = { formatExpenses };
+
+
+
+export async function getExpenses() {
+
+        try {
+                // ruwe data ophaalt via getExpensesData()
+                const ruweData = await getExpensesData(); // is al geen json meer, wel promise object
+
+                // het resultaat verwerkt met formatExpenses()
+                const expenses = formatExpenses(ruweData);
+
+                const succes = { success: true, expenses }
+                return succes;
+        }
+
+        catch (error) {
+                const failure = { success: false, error }
+                return failure;
+        }
+
+
+}
+
+// je moet met async want anders kan je functie niet exporteren
+
+
