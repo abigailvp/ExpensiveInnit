@@ -31,14 +31,16 @@ function renderExpenses(element, expenses) {
     }
     //  toon lijst 
     else {
-        const titel = document.createElement('ul');
+        const titel = document.createElement('h2');
         titel.textContent = 'Expenses lijst';
         element.appendChild(titel);
+        const lijst = document.createElement('ul'); //<li> zitten in ul, de titel is apart
+        element.appendChild(lijst);
 
-        for (let i = 0; i < array.length; i++) { // elke expense als tekst weergegeven
+        for (let i = 0; i < expenses.length; i++) { // elke expense als tekst weergegeven
             const expense = document.createElement('li');
-            expense.textContent = expenses[i];
-            element.appendChild(expense);
+            expense.textContent = `${expenses[i].id} - ${expenses[i].description} - ${expenses[i].amount} - ${expenses[i].date} - ${expenses[i].category}`;
+            lijst.appendChild(expense);
         }
     }
 }
@@ -47,12 +49,17 @@ function renderExpenses(element, expenses) {
 
 export async function showExpenses(element) {
     showLoading(element);
-    const data = await getExpenses();
-    if (data) {
-        renderExpenses(element, data.expenses); //.expenses zodat je in object property expenses selecteert
+    try {
+        const data = await getExpenses();
+        if (data && data.expenses) {
+            renderExpenses(element, data.expenses); //.expenses zodat je in object property expenses selecteert
+        }
+        else {
+            showError(element, data.error)
+        }
     }
-    else {
-        showError(element, data.error);
+    catch (error) {
+        showError(element, error.message);
     }
 }
 
