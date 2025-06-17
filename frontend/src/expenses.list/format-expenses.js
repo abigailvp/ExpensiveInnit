@@ -1,12 +1,18 @@
 import { getExpensesData } from "./fetch-expenses.js";
 
-export function formatExpenses(expenses) { //expenses van fetch omzetten en date (zonder value) aan toevoegen
+function formatExpenses(expenses) { //expenses van fetch omzetten en date (zonder value) aan toevoegen
 
-        const d = new Date(); // nieuwe datum via constructor, neemt ook argumenten> andere date
+        try {
+                const d = new Date(); // nieuwe datum via constructor, neemt ook argumenten> andere date
 
-        //je wilt een object toevoegen, niet enkel de datum
-        expenses.forEach(objectExpense => objectExpense.date = d.toLocaleDateString()) //toLocaleDateString() zet d om in een ander format van datum
-        return expenses;
+                //je wilt een object toevoegen, niet enkel de datum
+                expenses.forEach(objectExpense => objectExpense.date = d.toLocaleDateString()) //toLocaleDateString() zet d om in een ander format van datum
+                return expenses;
+        }
+
+        catch (error) {
+                throw new Error("error");
+        }
 
 }
 
@@ -20,7 +26,6 @@ export function formatExpenses(expenses) { //expenses van fetch omzetten en date
 
 // Maak deze hulpfunctie
 // testbaar zonder ze publiek te maken met een export zoals:
-
 export const __only_for_test = { formatExpenses };
 
 
@@ -47,5 +52,7 @@ export async function getExpenses() {
 }
 
 // je moet met async want anders kan je functie niet exporteren
+
+//output van functie is object
 
 

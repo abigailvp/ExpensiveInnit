@@ -1,7 +1,15 @@
-import { describe, it, expect, expect, vi, beforeEach } from 'vitest';
-import { formatExpenses } from "../../src/expenses.list/format-expenses.js";
-import { getExpensesData } from '../../src/expenses-list/fetch-expenses.js';
-import { getExpenses, __only_for_test as internal } from '../../src/expenses-list/format-expenses.js';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+//simulaties moeten altijd hier staan
+vi.mock('../../src/expenses.list/fetch-expenses.js', () => ({
+    getExpensesData: vi.fn(),
+})); //simulatie van getExpensesData OMDAT je niet echt data wilt fetchen
+
+global.fetch = vi.fn();
+
+import { getExpensesData } from '../../src/expenses.list/fetch-expenses.js';
+import { __only_for_test, getExpenses } from '../../src/expenses.list/format-expenses.js';
+
+const { formatExpenses } = __only_for_test;
 
 //FUCNTIE 1
 describe('array formatteren', () => {
@@ -21,44 +29,36 @@ describe('array formatteren', () => {
 
 //FUNCTIE2
 
-vi.mock('../../src/expenses-list/fetch-expenses.js', () => ({
-    getExpensesData: vi.fn(),
-})); //simulatie van getExpensesData OMDAT je niet echt data wilt fetchen
-
-vi.mock('../../src/expenses-list/format-expenses.js', () => ({
-    formatExpenses: vi.fn(),
-})); //simulatie van formatExpenses omdat binnen getExpenses je data van getExpensesData gebruikt
 
 describe("statusobject teruggeven", () => {
     beforeEach(() => {
+        vi.resetAllMocks(); //resetten zodat je bij elke test trg een lege functie hebt
         fetch.mockReset();
     });
 
     it("geeft succesobject bij succes", async () => {
 
-        getExpensesData.mockResolvedValue([{ id: "fruit", aantal: 100 }, { id: "koekjes", aantal: 400 }]);
+        const data = [{ id: "fruit", aantal: 100 }, { id: "koekjes", aantal: 400 }];
+        const formatted = [{ id: "fruit", aantal: 100, date: "17/6/2025" }, { id: "koekjes", aantal: 400, date: "17/6/2025" }];
+        getExpensesData.mockResolvedValue(data);
         // laat ASYNCHRONE functie RESOLVEN en dit retourneren
 
-        formatExpenses.mockReturnValue([{ id: "fruit", aantal: 100, date: 16 / 6 / 25 }, { id: "koekjes", aantal: 400, date: 16 / 6 / 25 }]);
-        const expenses = [{ id: "fruit", aantal: 100, date: 16 / 6 / 25 }, { id: "koekjes", aantal: 400, date: 16 / 6 / 25 }]
+        expect(formatExpenses(data)).toEqual(formatted); //toEqual want gaat om inhoud
+
         const result = await getExpenses();
-        expect(result).toEqual({ success: true, expenses });
+        expect(result).toEqual({ success: true, expenses: formatted });
     });
 
-    it("geeft failureobject bij reject", async () => {
-        getExpenseDate.mockResolvedValue([{ id: "fruit", aantal: 100 }, { id: koekjes, aantal: 400 }]);
-        const result = await getExpenses();
-        expect(getExpenses()).toEqual({ success: false, error });
+    // test kan falen als de data niet wordt gefetchd OF als geen date toegevoegd
+    it("geeft failureobject bij niet kunnen fetchen", async () => {
+        fetch.mockResolvedValueOnce({ ok: false });
+
+        const failFetch = await getExpenses();
+
+        expect(failFetch.success).toBe(false); //getExpenses geeft object terug > .succes = property van object
+        expect(failFetch.error).toBeInstanceOf(Error);
+        expect(failFetch.error.message).toContain("error");
     });
 
-    it("geeft failureobject bij formatExpenses error idfk", async () => {
-        const expenses = [{ id: "koekjes", aantal: 400 }];
-        fetch.mockResolvedValueOnce({
-            ok: true,
-            json: async () => expenses,
-        });
-        const result = await getExpenses();
-        expect(getExpenses()).toEqual({ success: false, error });
-    });
 
 })
