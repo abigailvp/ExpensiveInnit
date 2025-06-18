@@ -1,0 +1,1 @@
+import { } from '../../src/expenses-create/bind-form.js';
