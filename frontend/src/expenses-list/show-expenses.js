@@ -1,4 +1,5 @@
 import { getExpenses } from "./format-expenses.js";
+import { showError } from "../ui-helpers.js"
 
 function showLoading(element) { //  toont een paragraaf met de tekst "Loading...".
     const p = document.createElement('p');
@@ -55,18 +56,8 @@ export async function showExpenses(element) {
     }
 }
 
-function showError(element, error) { //toont een paragraaf met de foutmelding en maakt de tekst rood.
-    // error.setAttribute('id', 'errorId');
-    const melding = document.createElement('p');
-    melding.textContent = error;
-    melding.style.color = "red";
 
-    element.appendChild(melding); //getElementById gaat pas na appenden
-
-}
-
-
-export const __only_for_test = { showLoading, showError, showEmptyState, renderExpenses };
+export const __only_for_test = { showLoading, showEmptyState, renderExpenses };
 // exporteren op deze manier omdat
 // je niet wilt dat de tekst direct in de html zit
 // wel als showExpenses aangeroepen wordt

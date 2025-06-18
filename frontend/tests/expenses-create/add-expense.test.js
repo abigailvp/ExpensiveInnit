@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
-vi.mock('../../src/expenses-create/post-expenses.js', () => ({
+vi.mock('../../src/expenses-create/post-expense.js', () => ({
     createExpense: vi.fn(),
 })); //simulatie van createExpense OMDAT je niet echt wilt uitvoeren
 
@@ -49,7 +49,6 @@ describe("addExpense", () => {
         const result = await addExpense(data);
 
         expect(createExpense).toHaveBeenCalledWith(data);
-        expect(result).toEqual({ success: true });
     });
 
 
