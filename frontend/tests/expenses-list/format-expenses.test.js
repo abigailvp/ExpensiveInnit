@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 //simulaties moeten altijd hier staan
-vi.mock('../../src/expenses.list/fetch-expenses.js', () => ({
+vi.mock('../../src/expenses-list/fetch-expenses.js', () => ({
     getExpensesData: vi.fn(),
 })); //simulatie van getExpensesData OMDAT je niet echt data wilt fetchen
 
 global.fetch = vi.fn();
 
-import { getExpensesData } from '../../src/expenses.list/fetch-expenses.js';
-import { __only_for_test, getExpenses } from '../../src/expenses.list/format-expenses.js';
+import { getExpensesData } from '../../src/expenses-list/fetch-expenses.js';
+import { __only_for_test, getExpenses } from '../../src/expenses-list/format-expenses.js';
 
 const { formatExpenses } = __only_for_test;
 
@@ -39,7 +39,7 @@ describe("statusobject teruggeven", () => {
     it("geeft succesobject bij succes", async () => {
 
         const data = [{ id: "fruit", aantal: 100 }, { id: "koekjes", aantal: 400 }];
-        const formatted = [{ id: "fruit", aantal: 100, date: "17/6/2025" }, { id: "koekjes", aantal: 400, date: "17/6/2025" }];
+        const formatted = [{ id: "fruit", aantal: 100, date: "18/6/2025" }, { id: "koekjes", aantal: 400, date: "18/6/2025" }];
         getExpensesData.mockResolvedValue(data);
         // laat ASYNCHRONE functie RESOLVEN en dit retourneren
 

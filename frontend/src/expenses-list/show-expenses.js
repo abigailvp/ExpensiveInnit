@@ -8,15 +8,7 @@ function showLoading(element) { //  toont een paragraaf met de tekst "Loading...
     element.appendChild(p);
 }
 
-function showError(element, error) { //toont een paragraaf met de foutmelding en maakt de tekst rood.
-    // error.setAttribute('id', 'errorId');
-    const melding = document.createElement('p');
-    melding.textContent = error;
-    melding.style.color = "red";
 
-    element.appendChild(melding); //getElementById gaat pas na appenden
-
-}
 
 function showEmptyState(element) { // toont een paragraaf met de tekst "No expenses found.".
     const p = document.createElement('p');
@@ -42,7 +34,7 @@ function renderExpenses(element, expenses) {
             expense.textContent = `${expenses[i].id} - ${expenses[i].description} - ${expenses[i].amount} - ${expenses[i].date} - ${expenses[i].category}`;
             lijst.appendChild(expense);
         }
-    }
+    }//kan ook met forEach
 }
 
 
@@ -61,6 +53,16 @@ export async function showExpenses(element) {
     catch (error) {
         showError(element, error.message);
     }
+}
+
+function showError(element, error) { //toont een paragraaf met de foutmelding en maakt de tekst rood.
+    // error.setAttribute('id', 'errorId');
+    const melding = document.createElement('p');
+    melding.textContent = error;
+    melding.style.color = "red";
+
+    element.appendChild(melding); //getElementById gaat pas na appenden
+
 }
 
 
