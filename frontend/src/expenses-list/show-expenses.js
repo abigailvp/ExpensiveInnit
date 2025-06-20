@@ -1,23 +1,22 @@
 import { getExpenses } from "./format-expenses.js";
-import { showError } from "../ui-helpers.js"
+import { showError } from "../ui-helpers.js";
+import { appendDeleteButton } from "./delete-button.js";
 
-function showLoading(element) { //  toont een paragraaf met de tekst "Loading...".
+export function showLoading(element) { //  toont een paragraaf met de tekst "Loading...".
     const p = document.createElement('p');
     p.textContent = "Loading...";
 
-    //toevoegen aan element
-    element.appendChild(p);
+    //overschrijven van childelements
+    element.replaceChildren(p);
 }
 
-
-
-function showEmptyState(element) { // toont een paragraaf met de tekst "No expenses found.".
+export function showEmptyState(element) { // toont een paragraaf met de tekst "No expenses found.".
     const p = document.createElement('p');
     p.textContent = "No expenses found.";
-    element.appendChild(p);
+    element.replaceChildren(p);
 }
 
-function renderExpenses(element, expenses) {
+export function renderExpenses(element, expenses) {
     //Als de array leeg is, toon je de lege staat. 
     if (expenses.length < 1 || expenses == undefined) {
         showEmptyState(element);
@@ -26,16 +25,21 @@ function renderExpenses(element, expenses) {
     else {
         const titel = document.createElement('h2');
         titel.textContent = 'Expenses lijst';
-        element.appendChild(titel);
+        element.replaceChildren(titel);
         const lijst = document.createElement('ul'); //<li> zitten in ul, de titel is apart
-        element.appendChild(lijst);
 
+
+        //kan ook met forEach
         for (let i = 0; i < expenses.length; i++) { // elke expense als tekst weergegeven
-            const expense = document.createElement('li');
-            expense.textContent = `${expenses[i].id} - ${expenses[i].description} - ${expenses[i].amount} - ${expenses[i].date} - ${expenses[i].category}`;
-            lijst.appendChild(expense);
+            const lijstItem = document.createElement('li');
+            lijstItem.textContent = `${expenses[i].id} - ${expenses[i].description} - ${expenses[i].amount} - ${expenses[i].displayDate} - ${expenses[i].category}`;
+            appendDeleteButton(element, lijstItem, expenses[i]);
+            lijst.appendChild(lijstItem);
+            //< li > -element als parent
+
         }
-    }//kan ook met forEach
+        element.appendChild(lijst); //beter hier, performantie
+    }
 }
 
 

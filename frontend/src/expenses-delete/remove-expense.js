@@ -1,22 +1,18 @@
-async function removeExpense(id) {
+import { deleteExpense } from './delete-expense.js';
+
+export async function removeExpense(id) {
     const result = await deleteExpense(id);
-    if (result) {
-        return { success: true }
+    if (result) { //status 200 of 204
+        return { success: true };
     }
 
-    else {
+    else { //404 of niet kunnen fetchen
+
         return { success: false, error }
     }
 }
 
 
-
-
-
-
-// Maak een nieuw bestand remove-expense.js aan in /src/expenses-delete/
-
-// Maak een testbestand remove-expense.test.js aan in /tests/expenses-delete/
 
 // Implementeer en test de functie removeExpense(id):
 

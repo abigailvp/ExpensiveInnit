@@ -1,8 +1,16 @@
 import { showExpenses } from "./expenses-list/show-expenses.js";
-import { bindFormSubmit } from '../expenses-create/bind-form.js'; //CHECK DEZE NOG
+import { bindFormSubmit } from './expenses-create/bind-form.js';
 
-const app = document.getElementById('app');
-showExpenses(app);
+
+const element = document.getElementById('app')
+
+showExpenses(element);
+
+
+const form = document.getElementById('form');
+bindFormSubmit(form, element);
+
+
 
 
 

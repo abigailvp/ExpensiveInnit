@@ -1,0 +1,23 @@
+.confirm-delete {
+    background-color: red;
+}
+
+.confirm-delete :focus {
+    background-color: brown;
+}
+
+.confirm-label {
+    display: hidden;
+}
+
+.confirm-label:focus {
+    display: block;
+}
+
+.trash-icon {
+    background-color: brown;
+}
+
+/* klassen: .confirm-delete is standaard een kleine ronde knop Op :focus wordt de knop breder .trash-icon toont een "X" icoon .confirm-label is verborgen maar verschijnt op :focus en bevat bv. "Zeker?"
+Gebruik transition en transform om de animatie tussen beide toestanden vloeiend te maken Klikgedrag blijft enkel gebonden aan de confirm-label,
+zoals eerder geïmplementeerd in appendDeleteButton Styling in style.css */

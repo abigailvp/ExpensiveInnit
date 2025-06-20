@@ -1,5 +1,6 @@
-import { showError } from '../../src/ui-helpers.js'
+import { showError } from '../../src/ui-helpers.js';
 import { showExpenses } from '../expenses-list/show-expenses.js';
+import { addExpense } from './add-expense.js';
 
 function submitExpense(form) {
 
@@ -47,26 +48,18 @@ export const __only_for_test = { submitExpense, updateUI }
 // (bijv. UI feedback geven op basis van result)
 // export via __only_for_test
 
-function bindFormSubmit(form, element) {
-    form.addEventListener("submit", submitExpense);
-    const formData = new FormData(form);
-
-
-    if (addExpense(data).success) {
-        form.reset();
-        updateUI(form, element, result);
-
-    }
-    else {
-        showError(element, message);
-    }
-
-
+export async function bindFormSubmit(form, element) {
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const result = await submitExpense(form);
+        await updateUI(form, element, result);
+    });
 }
+
 // Implementeer en test de functie bindFormSubmit(form, element):
 // registreert een submit-handler op het formulier
 // haalt de formdata op via FormData
-// roept addExpense(data) aan
+//      roept addExpense(data) aan
 // bij succes: reset het formulier en toont de geüpdatete lijst
 // via showExpenses(element) (import show-expenses.js)
 // bij fout: toont een foutmelding via showError(element, message)
