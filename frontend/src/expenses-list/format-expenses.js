@@ -1,18 +1,15 @@
 import { getExpensesData } from "./fetch-expenses.js";
-
+function formatExpense(expense) {
+        const objectDate = expense.date;
+        let realDate = new Date(objectDate);
+        expense.displayDate = realDate.toLocaleDateString(); //toLocaleDateString() zet d om in een ander format van datum
+        return expense;
+}
 function formatExpenses(expenses) { //expenses van fetch omzetten en date (zonder value) aan toevoegen
 
-        try {
-                const d = new Date(); // nieuwe datum via constructor, neemt ook argumenten> andere date
-
-                //je wilt een object toevoegen, niet enkel de datum
-                expenses.forEach(objectExpense => objectExpense.date = d.toLocaleDateString()) //toLocaleDateString() zet d om in een ander format van datum
-                return expenses;
-        }
-
-        catch (error) {
-                throw new Error("error");
-        }
+        //je wilt een object toevoegen, niet enkel de datum
+        expenses.forEach(expense => formatExpense(expense))
+        return expenses;
 
 }
 

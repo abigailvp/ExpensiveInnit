@@ -1,14 +1,37 @@
 import { showError } from '../../src/ui-helpers.js'
+import { showExpenses } from '../expenses-list/show-expenses.js';
+
 function submitExpense(form) {
 
+    const formData = new FormData(form);
+
+    const data = {};
+    data.description = formData.get("description");
+    data.amount = formData.get("amount");
+    data.date = formData.get("date");
+    data.category = formData.get("category");
+
+    const result = addExpense(data);
+    return result;
 }
+
+
+
 // Implementeer en test de functie submitExpense(form):
 // leest waarden uit het formulier via FormData
 // vormt een object data
 // roept addExpense(data) aan en geeft het resultaat terug
 // export via __only_for_test
-function updateUI(form, element, result) {
 
+
+function updateUI(form, element, result) {
+    if (result.success == true) {
+        form.reset();
+        showExpenses(element); //lijst opnieuw laden
+    }
+    else {
+        showError(element, result.error);
+    }
 }
 
 
@@ -25,6 +48,19 @@ export const __only_for_test = { submitExpense, updateUI }
 // export via __only_for_test
 
 function bindFormSubmit(form, element) {
+    form.addEventListener("submit", submitExpense);
+    const formData = new FormData(form);
+
+
+    if (addExpense(data).success) {
+        form.reset();
+        updateUI(form, element, result);
+
+    }
+    else {
+        showError(element, message);
+    }
+
 
 }
 // Implementeer en test de functie bindFormSubmit(form, element):
