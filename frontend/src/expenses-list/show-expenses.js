@@ -2,12 +2,14 @@ import { getExpenses } from "./format-expenses.js";
 import { showError } from "../ui-helpers.js";
 import { appendDeleteButton } from "./delete-button.js";
 
-export function showLoading(element) { //  toont een paragraaf met de tekst "Loading...".
-    const p = document.createElement('p');
+export function showLoading(element) { // toont een paragraaf met de tekst "Loading...".
+    const p = document.createElement('p'); //gaat alleen maar als je telkens het element overschrijft
     p.textContent = "Loading...";
 
-    //overschrijven van childelements
-    element.replaceChildren(p);
+    //overschrijven van childelements, niet toevoegen
+    element.replaceChildren(p); //element is lege div
+    //div met p in => p is child
+    //DUS parent.replaceChildren(child) basically
 }
 
 export function showEmptyState(element) { // toont een paragraaf met de tekst "No expenses found.".
@@ -24,7 +26,6 @@ export function renderExpenses(element, expenses) {
     //  toon lijst 
     else {
         const lijst = document.createElement('ul'); //<li> zitten in ul, de titel is apart
-        // lijst.setAttribute('class', 'expenses');
 
         //kan ook met forEach
         for (let i = 0; i < expenses.length; i++) { // elke expense als tekst weergegeven

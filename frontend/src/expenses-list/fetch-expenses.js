@@ -10,9 +10,6 @@ export async function getExpensesData() { //haalt ruwe data van API via GET/expe
 }
 
 
-// Laat fouten doorsijpelen naar de servicelaag:
-
-// Gebruik throw als response.ok niet waar is.
-// Vermijd try/catch hier, foutafhandeling gebeurt hogerop.
+//ENKEL data ophalen van server
 
 
