@@ -23,22 +23,19 @@ export function renderExpenses(element, expenses) {
     }
     //  toon lijst 
     else {
-        const titel = document.createElement('h2');
-        titel.textContent = 'Expenses lijst';
-        element.replaceChildren(titel);
         const lijst = document.createElement('ul'); //<li> zitten in ul, de titel is apart
-
+        // lijst.setAttribute('class', 'expenses');
 
         //kan ook met forEach
         for (let i = 0; i < expenses.length; i++) { // elke expense als tekst weergegeven
             const lijstItem = document.createElement('li');
             lijstItem.textContent = `${expenses[i].id} - ${expenses[i].description} - ${expenses[i].amount} - ${expenses[i].displayDate} - ${expenses[i].category}`;
-            appendDeleteButton(element, lijstItem, expenses[i]);
+            appendDeleteButton(lijstItem, element, expenses[i]);
             lijst.appendChild(lijstItem);
             //< li > -element als parent
 
         }
-        element.appendChild(lijst); //beter hier, performantie
+        element.replaceChildren(lijst); //beter hier, performantie
     }
 }
 

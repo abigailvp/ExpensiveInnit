@@ -1,30 +1,16 @@
 [
-  {
-    "id": "1a2b3c",
-    "description": "Lunch bij Broodje Mario",
-    "amount": 8.5,
-    "date": "2025-06-12",
-    "category": "Eten"
-  },
-  {
-    "id": "4d5e6f",
-    "description": "Treinticket Gent → Brussel",
-    "amount": 9.2,
-    "date": "2025-06-11",
-    "category": "Transport"
-  },
-  {
-    "id": "7g8h9i",
-    "description": "Boek 'Clean Code'",
-    "amount": 34.95,
-    "date": "2025-06-10",
-    "category": "Educatie"
-  },
-  {
-    "id": "9373cba0-409c-4f2f-bc03-837a2fe8b6e5",
-    "description": "x",
-    "amount": "200",
-    "date": "28-06-2024",
-    "category": "food"
-  }
+    {
+        "id": "1a2b3c",
+        "description": "Lunch bij Broodje Mario",
+        "amount": 8.5,
+        "date": "2025-06-12",
+        "category": "Eten"
+    },
+    {
+        "id": "7g8h9i",
+        "description": "Boek 'Clean Code'",
+        "amount": 34.95,
+        "date": "2025-06-10",
+        "category": "Educatie"
+    }
 ]

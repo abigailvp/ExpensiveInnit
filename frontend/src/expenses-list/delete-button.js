@@ -6,7 +6,7 @@ import { showError } from '../ui-helpers.js';
 async function onDeleteButtonClicked(element, expense) {
     const result = await removeExpense(expense.id);
     if (result.success) {
-        showExpenses(element);
+        await showExpenses(element);
     }
     else {
         showError(element, result.error)
@@ -21,7 +21,7 @@ async function onDeleteButtonClicked(element, expense) {
 // Bij fout: showError(element, result.error)
 // export via __only_for_test
 
-export function appendDeleteButton(parent, element, expense) {
+export async function appendDeleteButton(parent, element, expense) { //element (=div)> parent(=lijstitem)> expense
     const btn = document.createElement('button');
     btn.setAttribute('class', 'confirm-delete');
 
@@ -30,14 +30,15 @@ export function appendDeleteButton(parent, element, expense) {
     spanConfirm.textContent = 'Zeker'; //value gaat niet bij span
     btn.appendChild(spanConfirm);
 
-    spanConfirm.addEventListener('click', () => onDeleteButtonClicked(element, expense))
+    spanConfirm.addEventListener('click', async () => await onDeleteButtonClicked(element, expense))
+    //event listener moet altijd met arrow function ALS ARGUMENT!!!!!
 
     const spanTrash = document.createElement('span');
     spanTrash.setAttribute('class', 'trash-icon');
     spanTrash.textContent = 'ⓧ';
     btn.appendChild(spanTrash);
 
-    element.appendChild(btn);
+    parent.appendChild(btn);
 }
 
 

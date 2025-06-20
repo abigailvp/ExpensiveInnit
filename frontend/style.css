@@ -1,9 +1,9 @@
 .confirm-delete {
-    background-color: red;
+    background-color: rgb(238, 123, 123);
 }
 
 .confirm-delete :focus {
-    background-color: brown;
+    background-color: rgb(212, 82, 82);
 }
 
 .confirm-label {
@@ -15,8 +15,30 @@
 }
 
 .trash-icon {
-    background-color: brown;
+    background-color: rgb(241, 35, 35);
 }
+
+#app {
+    background-color: bisque;
+    font-size: 20px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+#form {
+    background-color: bisque;
+    font-size: 20px;
+}
+
+#submit {
+    font-size: 20px;
+    background-color: brown;
+    color: white;
+}
+
 
 /* klassen: .confirm-delete is standaard een kleine ronde knop Op :focus wordt de knop breder .trash-icon toont een "X" icoon .confirm-label is verborgen maar verschijnt op :focus en bevat bv. "Zeker?"
 Gebruik transition en transform om de animatie tussen beide toestanden vloeiend te maken Klikgedrag blijft enkel gebonden aan de confirm-label,
