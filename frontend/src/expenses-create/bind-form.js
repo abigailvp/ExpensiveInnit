@@ -4,7 +4,7 @@ import { addExpense } from './add-expense.js';
 
 function submitExpense(form) {
 
-    const formData = new FormData(form);
+    const formData = new FormData(form); //neemt input in form op
 
     const data = {};
     data.description = formData.get("description");

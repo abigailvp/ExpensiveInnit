@@ -9,7 +9,7 @@ export function showLoading(element) { // toont een paragraaf met de tekst "Load
     //overschrijven van childelements, niet toevoegen
     element.replaceChildren(p); //element is lege div
     //div met p in => p is child
-    //DUS parent.replaceChildren(child) basically
+    //DUS parent.replaceChildren(child) basically: je vervangt de children
 }
 
 export function showEmptyState(element) { // toont een paragraaf met de tekst "No expenses found.".
@@ -23,9 +23,9 @@ export function renderExpenses(element, expenses) {
     if (expenses.length < 1 || expenses == undefined) {
         showEmptyState(element);
     }
-    //  toon lijst 
+    // Als array niet leeg is, toon lijst met expenses
     else {
-        const lijst = document.createElement('ul'); //<li> zitten in ul, de titel is apart
+        const lijst = document.createElement('ul'); //<li> zitten in ul
 
         //kan ook met forEach
         for (let i = 0; i < expenses.length; i++) { // elke expense als tekst weergegeven
@@ -60,6 +60,10 @@ export async function showExpenses(element) {
 
 
 export const __only_for_test = { showLoading, showEmptyState, renderExpenses };
-// exporteren op deze manier omdat
-// je niet wilt dat de tekst direct in de html zit
-// wel als showExpenses aangeroepen wordt
+
+//showExpenses:
+    //showLoading
+    //showError
+    //renderExpenses
+        //showt niks 
+        // showt lijst met expenses

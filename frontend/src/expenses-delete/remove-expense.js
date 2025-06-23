@@ -1,6 +1,6 @@
 import { deleteExpense } from './delete-expense.js';
 
-export async function removeExpense(id) {
+export async function removeExpense(id) { //is delete gelukt
     const result = await deleteExpense(id);
     if (result) { //status 200 of 204
         return { success: true };

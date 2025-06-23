@@ -20,7 +20,7 @@ export function validateFormData(data) {
 }
 
 
-export async function addExpense(data) {
+export async function addExpense(data) { //validatie en fetch 
     const validatie = validateFormData(data); //geeft{ success: true } of { success: true, error }
     if (validatie.success) { //success en error zijn properties van validatie!!!!!!!
 
