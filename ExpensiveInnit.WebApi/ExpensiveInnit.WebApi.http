@@ -1,0 +1,6 @@
+@ExpensiveInnit.WebApi_HostAddress = http://localhost:5082
+
+GET {{ExpensiveInnit.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
