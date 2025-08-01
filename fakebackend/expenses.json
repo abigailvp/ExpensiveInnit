@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1a2b3c",
+    "description": "Lunch bij Broodje Mario",
+    "amount": 8.5,
+    "date": "2025-06-12",
+    "category": "Eten"
+  },
+  {
+    "id": "7g8h9i",
+    "description": "Boek 'Clean Code'",
+    "amount": 34.95,
+    "date": "2025-06-10",
+    "category": "Educatie"
+  }
+]
