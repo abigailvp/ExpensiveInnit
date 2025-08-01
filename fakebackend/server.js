@@ -25,13 +25,13 @@ async function writeExpenses(expenses) {
 }
 
 // GET /expenses
-app.get('/expenses', async (req, res) => {
+app.get('/api/expenses', async (req, res) => {
   const expenses = await readExpenses();
   res.json(expenses);
 });
 
 // POST /expenses
-app.post('/expenses', async (req, res) => {
+app.post('/api/expenses', async (req, res) => {
   const { description, amount, date, category } = req.body;
 
   if (!description || !amount || !date) {
@@ -54,7 +54,7 @@ app.post('/expenses', async (req, res) => {
 });
 
 // DELETE /expenses/:id
-app.delete('/expenses/:id', async (req, res) => {
+app.delete('/api/expenses/:id', async (req, res) => {
   const { id } = req.params;
   let expenses = await readExpenses();
   const originalLength = expenses.length;

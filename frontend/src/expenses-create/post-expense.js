@@ -4,7 +4,7 @@ export async function createExpense(data) {
         throw new Error('not enough data');
     }
 
-    const response = await fetch("http://localhost:3000/expenses", {
+    const response = await fetch("http://localhost:5082/api/expenses", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" }

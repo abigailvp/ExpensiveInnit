@@ -5,28 +5,31 @@ namespace EfCore;
 public class Expense
 {
     [Key] //moet je instellen voor EF
-    public int id { get; set; }
+    public int Id { get; set; }
 
     [Required] //mag niet null of leeg zijn
     [MinLength(1)] //moet minstens 1 character hebben
-    public string description { get; set; }
+    public string Description { get; set; }
 
     [Required]
     [Range(1, int.MaxValue)] //amount ligt tss 1 en max
-    public double amount { get; set; }
+    public double Amount { get; set; }
 
     [Required]
     [DataType(DataType.Date)] //enkel datum uit DateTime
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-    public DateTime date { get; set; }
+    public DateTime Date { get; set; }
+
+    public string Category { get; set; }
 
     public Expense() { } //EF heeft deze nodig voor migrations uit te voeren
 
-    public Expense(int Id, string Description, double Amount, DateTime Date)
+    public Expense(int id, string description, double amount, DateTime date, string category)
     {
-        id = Id;
-        description = Description;
-        amount = Amount;
-        date = Date;
+        Id = id;
+        Description = description;
+        Amount = amount;
+        Date = date;
+        Category = category;
     }
 }
